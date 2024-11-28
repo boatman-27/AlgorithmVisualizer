@@ -10,7 +10,7 @@ function Visualizer({ array = [] }) {
           {array.map((value, index) => (
             <div
               key={index}
-              className={`Bar ${
+              className={`Bar text-sm ${
                 array.length > 50
                   ? "w-[8px] md:w-[13.5px]"
                   : array.length > 40
@@ -28,42 +28,11 @@ function Visualizer({ array = [] }) {
                 borderRadius: "5px",
                 backgroundColor: "rgba(0, 123, 255, 0.8)",
               }}
-            ></div>
+            >
+              {value}
+            </div>
           ))}
         </div>
-
-        {array.length ? (
-          <div className="flex flex-wrap items-center justify-center space-x-4 sm:space-x-6 mt-6">
-            <div className="flex items-center space-x-2">
-              <div
-                className="h-4 w-4 rounded"
-                style={{ backgroundColor: "rgba(0, 123, 255, 0.8)" }}
-              ></div>
-              <span className="text-white">Default</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div
-                className="h-4 w-4 rounded"
-                style={{ backgroundColor: "rgba(186, 181, 7, 0.8)" }}
-              ></div>
-              <span className="text-white">Value being Compared</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div
-                className="h-4 w-4 rounded"
-                style={{ backgroundColor: "rgba(6, 140, 14, 0.8)" }}
-              ></div>
-              <span className="text-white">Current Smallest</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div
-                className="h-4 w-4 rounded"
-                style={{ backgroundColor: "rgba(178, 7, 7, 0.8)" }}
-              ></div>
-              <span className="text-white">Traversing Pointer</span>
-            </div>
-          </div>
-        ) : null}
       </div>
     </div>
   );

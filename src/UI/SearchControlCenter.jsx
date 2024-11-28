@@ -3,23 +3,27 @@ import Button from "./Button";
 import CodeBlock from "./CodeBlock";
 import { useState } from "react";
 
-function SortingControlCenter({
-  setSortingMethod,
-  chosenSortingMethod,
+function SearchControlCenter({
+  searchingMethods,
+  chosenSearchingMethod,
+  setChosenSearchingMethod,
   languages,
-  sortingMethods,
 }) {
-  const getCodeSnippet = () => {
+  const [selectedSearchingLanguage, setSelectedSearchingLanguage] = useState(
+    chosenSearchingMethod?.pythonCode
+  );
+
+  const getSearchingCodeSnippet = () => {
     let codeSnippet;
-    switch (selectedSortingLanguage) {
+    switch (selectedSearchingLanguage) {
       case "cpp":
-        codeSnippet = chosenSortingMethod?.cppCode;
+        codeSnippet = chosenSearchingMethod?.cppCode;
         break;
       case "python":
-        codeSnippet = chosenSortingMethod?.pythonCode;
+        codeSnippet = chosenSearchingMethod?.pythonCode;
         break;
       case "javascript":
-        codeSnippet = chosenSortingMethod?.jsCode;
+        codeSnippet = chosenSearchingMethod?.jsCode;
         break;
       default:
         codeSnippet = "// Code not available";
@@ -32,24 +36,20 @@ function SortingControlCenter({
     return codeSnippet;
   };
 
-  const [selectedSortingLanguage, setSelectedSortingLanguage] = useState(
-    chosenSortingMethod?.pythonCode
-  );
-
   return (
     <div className="w-full">
-      <h1 className="text-center text-3xl font-semibold tracking-tight text-white sm:text-5xl">
-        Sorting
+      <h1 className="text-center text-3xl font-semibold tracking-tight text-white md:text-5xl">
+        Searching
       </h1>
 
       <div className="flex flex-row gap-2 items-center justify-center p-2 mt-3">
-        {sortingMethods.map((method) => (
+        {searchingMethods.map((method) => (
           <Button
             key={method.name}
             type="answer"
-            onClick={() => setSortingMethod(method)}
+            onClick={() => setChosenSearchingMethod(method)}
             customClass={
-              method.name === chosenSortingMethod?.name
+              method.name === chosenSearchingMethod?.name
                 ? "border-2 border-yellow-500"
                 : ""
             }
@@ -58,21 +58,20 @@ function SortingControlCenter({
           </Button>
         ))}
       </div>
-
       <div className="flex flex-col md:flex-row gap-2 items-center justify-center p-2 mt-3 whitespace-nowrap">
         {languages.map((language) => (
           <Button
             key={language.name}
             type="answer"
             onClick={() => {
-              if (language.value === selectedSortingLanguage) {
-                setSelectedSortingLanguage("");
+              if (language.value === selectedSearchingLanguage) {
+                setSelectedSearchingLanguage("");
               } else {
-                setSelectedSortingLanguage(language.value);
+                setSelectedSearchingLanguage(language.value);
               }
             }}
             customClass={
-              selectedSortingLanguage === language.value
+              selectedSearchingLanguage === language.value
                 ? "border-2 border-yellow-500"
                 : ""
             }
@@ -83,10 +82,13 @@ function SortingControlCenter({
       </div>
 
       <div className="flex flex-col md:flex-row gap-2 items-center justify-center p-2 mt-3 w-full overflow-hidden">
-        <CodeBlock code={getCodeSnippet()} pLang={selectedSortingLanguage} />
+        <CodeBlock
+          code={getSearchingCodeSnippet()}
+          pLang={selectedSearchingLanguage}
+        />
       </div>
     </div>
   );
 }
 
-export default SortingControlCenter;
+export default SearchControlCenter;
