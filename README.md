@@ -77,5 +77,5 @@ The app offers many features including:
 ## Future Improvements
 
 - Add more algorithms like Heap Sort, Counting Sort, and Radix Sort.
-- Add Searching algorithms.
-  > > > > > > > 9820230d1b6d997e3a8c64f378d93d2d29b6e28a
+- Implement user-friendly code visualization for more languages.
+- Improve user interface and responsiveness.
